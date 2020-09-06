@@ -17,6 +17,8 @@ RUN apt-get update  && apt-get install -yq --fix-missing \
     zlib1g-dev \
     libxml2-dev \
     libzip-dev \
+    libcurl4 \
+    libcurl4-openssl-dev \
     locales \
     jpegoptim optipng pngquant gifsicle \
     unzip \
@@ -38,7 +40,9 @@ RUN pecl install xdebug && docker-php-ext-enable xdebug
 RUN docker-php-ext-install pdo_mysql zip exif pcntl
 RUN docker-php-ext-configure gd --with-freetype --with-jpeg 
 RUN docker-php-ext-install gd
-
+RUN docker-php-ext-install soap
+RUN docker-php-ext-install curl
+RUN docker-php-ext-install bcmath
 # Install composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
